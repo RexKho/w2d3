@@ -62,8 +62,34 @@ class Board
                     doneAlready << position
                 end
             end
+        end       
+    end
 
-        end
+    def hidden_ships_grid
+        newarr = @grid.map(&:dup)
         
+        
+        newarr.each_with_index do |suba, idx|
+            suba.each_with_index do |ele, idx2|
+                if ele == :S
+                    newarr[idx][idx2] = :N
+                end
+            end
+        end
+        return newarr
+    end
+
+    def self.print_grid(arr)
+        arr.each do |row|
+            puts row.join(" ")
+        end
+    end
+
+    def cheat()
+        Board.print_grid(@grid)
+    end
+    
+    def print()
+        Board.print_grid(hidden_ships_grid)
     end
 end
